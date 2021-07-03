@@ -10,13 +10,14 @@
   },
   "devDependencies": {},
   "scripts": {
+    "start": "node server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/zoofly/weekend-sql-to-do-list.git"
   },
-  "author": "",
+  "author": "kashmoney",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/zoofly/weekend-sql-to-do-list/issues"
