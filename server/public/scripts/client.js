@@ -17,15 +17,13 @@ function getTaskList(){
         url: "/tasks"
     }) .then ((res) => {
         console.log('getting tasks', res);
-        for( let i=0; i<response.length; i++) {
+        for( let i=0; i<res.length; i++) {
             $('#taskTableBody').append(`
             <tr>
-                <td> ${response[i].} </td>
-            
-            
-            
-            
+                <td> ${res[i].priority} </td>
+                <td> ${res[i].task} </td>
+                <td> ${res[i].complete} </td>
             </tr>`)
         }
-    })
+    });
 }
