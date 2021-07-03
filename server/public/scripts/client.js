@@ -1,17 +1,16 @@
-const { response } = require("express");
+$(document).on(onReady);
 
 console.log('Javascript linked');
-
-$(document).on(onReady);
 
 
 //renders whatever inputted within function onto DOM when loaded
 function onReady(){
-
+    getTaskList();
 }
 
 
 function getTaskList(){
+    $('#taskTableBody').empty();
     $.ajax({
         type: "GET",
         url: "/tasks"
@@ -22,7 +21,8 @@ function getTaskList(){
             <tr>
                 <td> ${res[i].priority} </td>
                 <td> ${res[i].task} </td>
-                <td> ${res[i].complete} </td>
+                <td data-id='completion'> ${res[i].complete} </td>
+                <td> <input  > </td>
             </tr>`)
         }
     });
