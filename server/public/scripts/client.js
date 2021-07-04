@@ -8,7 +8,7 @@ function onReady(){
     console.log("Page loaded");
     getTaskList();
     $('#addTask').on('click', addNewTask);
-    $('#taskTableBody').on('click', deleteTaskHandler);
+    $('#taskBody').on('click', deleteTaskHandler);
 }
 
 //get lists of task to populate on DOM
@@ -52,22 +52,25 @@ function clearInputs(){
 }
 
 function renderTaskList(taskList){
-    $('#taskTableBody').empty();
+    $('#taskBody').empty();
     for( let item of taskList) {
-        $('#taskTableBody').append(`
-        <tr>
-            <td> ${item.task} </td>
-            <td data-id='completion'> ${item.complete} </td>
-            <td> <button id="completedTaskBtn" data-id= ${item.id}> Mark as Complete </button> </td>
-            <td> <button id="deleteTaskBtn" data-id= ${item.id}> Delete Task </button> </td>
-        </tr>`);
+        $('#taskBody').append(`
+        <li class=">
+            ${item.task} 
+            STATUS : ${item.complete}
+            <button id="completedTaskBtn" data-complete= ${item.id}> Complete </button> 
+            <button id="deleteTaskBtn" data-delete= ${item.id}> Delete Task </button> 
+        </li>`);
+        if(item.complete === true){
+            $('li').css("background-color", "green");
+        }
     }
 
 };
 
 //DELETE REQUEST
 function deleteTaskHandler(){
-    deleteTask($(this).data('id'));
+    deleteTask($(this).data('delete'));
 }
 
 function deleteTask(taskId){
