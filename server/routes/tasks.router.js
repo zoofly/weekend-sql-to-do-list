@@ -57,12 +57,13 @@ router.post('/', (req,res) => {
 router.put('/:id', (req,res) => {
     const taskId= req.params.id;
     const queryText= `UPDATE tasks
-    SET "complete" = $1 
-    WHERE "id" =$2 ;`;
+    SET "complete" = true 
+    WHERE "id" =$1 ;`;
     pool.query(queryText, [
         req.body.complete, 
         taskId
     ]) .then ((dbResponse) =>{
+        console.log('Updated task status', dbResponse);
         res.sendStatus(200);
     }) .catch ((err) =>{
         console.log('error updating task', err);

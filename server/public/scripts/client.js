@@ -24,7 +24,7 @@ function getTaskList(){
         }) .catch((error) => {
             console.log('Error server response', error);
         });
-}
+} //end getTaskList
 
 //post new task to database and clear input field
 function addNewTask(){
@@ -45,33 +45,42 @@ function addNewTask(){
         console.log('error in posting new task', err);
         alert ('Unable to add new task. Please try again later.');
     });
-}
+} //end addNewTask
 
+//clears input field
 function clearInputs(){
     console.log('inputs have been cleared');
     $('#enterTaskIn').val('');
 }
 
+//populates table on database onto DOM
 function renderTaskList(taskList){
-    $('#taskBody').empty();
-    for( let item of taskList) {
-        $('#taskBody').append(`
-        <li>
-            ${item.task} 
-            STATUS : ${item.complete}
-            <button id="completedTaskBtn" data-complete= ${item.id}> Complete </button> 
-            <button id="deleteTaskBtn" data-delete= ${item.id}> Delete Task </button> 
-        </li>`);
-        if(item.complete === true){
-            $('li').css("background-color", "green");
+    $('#taskTableBody').empty();
+    for( let task of taskList) {
+        if( task.complete === false){
+        $('#taskTableBody').append(`
+        <tr class= "incompleteTask">
+            <td> <button id="completedTask" data-id= ${task.id}> Mark Complete </button> </td>
+            <td> ${task.task} </td>
+            <td> ${task.complete} </td>
+            <td> <button id="deleteTask" data-id= ${task.id}> Delete </button> </td>
+        </tr>`);
+        } else if (task.complete === true){
+            $('#taskTableBody').append(`
+            <tr class= "completedTask">
+                <td> </td>
+                <td> ${task.task} </td>
+                <td> ${task.complete} </td>
+                <td> <button id="deleteTask" data-id= ${task.id}> Delete </button> </td>
+            </tr>`);
         }
     }
-
-};
+};//end renderTaskList
 
 
 //PUT REQUEST"
 function markComplete(){
+    console.log('in markComplete')
     $.ajax({
         type: "PUT",
         url: `/tasks/${taskId}`
@@ -81,19 +90,19 @@ function markComplete(){
     }) .catch ( function (err) {
         console.log('Unable to update status');
     });
-}
+} // end markComplete
 
 
 //should change false complete status to true
-function completedTaskHandeler(taskId){
-    completedTask($(this).data('complete'));
+function completedTaskHandeler(){
+    completedTask($(this).data('id'));
 }
 
 //DELETE REQUEST
 
 //deletes from DOM
 function deleteTaskHandler(){
-    deleteTask($(this).data('delete'));
+    deleteTask($(this).data('id'));
 }
 
 //deletes from database
