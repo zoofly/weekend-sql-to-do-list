@@ -25,7 +25,7 @@ pool.on ('error', () =>{
 
 //GET ROUTE
 router.get('/', (req,res) =>{
-    let tasksList= 'SELECT * FROM tasks;';
+    let tasksList= `SELECT * FROM tasks;`;
     pool.query(tasksList)
     .then ((dbResponse) => {
         res.send(dbResponse.rows);
@@ -38,8 +38,20 @@ router.get('/', (req,res) =>{
 
 //POST
 router.post('/', (req,res) => {
+    console.log('From the server', req.body);
+    const newTask= req.body;
+    const taskList = `
+    INSERT INTO tasks (task, complete)
+    VALUES ($1, $2);`;
+    pool.query(taskList, [newTask.task, newTask.complete])
+    .then(dbResponse => {
+        res.sendStatus(201);
+    }) .catch( err => {
+        console.log('Error in posting to server', err);
+        res.sendStatus(500);
+    });
 
-})
+});
 
 //PUT
 router.put('/', (req,res) => {
@@ -49,7 +61,7 @@ router.put('/', (req,res) => {
 
 //DELETE
 router.delete('/', (req,res) => {
-    
+
 })
 
 

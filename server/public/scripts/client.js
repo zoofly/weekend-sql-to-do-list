@@ -10,10 +10,11 @@ function onReady(){
 
 //get lists of task to populate on DOM
 function getTaskList(){
+    console.log('in getTaskList');
     $.ajax({
         type: "GET",
         url: "/tasks"
-    }) .then ((res) => {
+    }) .then (function (res){
         renderTaskList(res)
         console.log('GET request successful');
         }) .catch((error) => {
@@ -29,14 +30,14 @@ function getTaskList(){
 //     operator='';
 // }
 
-function renderTaskList(){
+function renderTaskList(taskList){
     $('#taskTableBody').empty();
-    for( let item of res) {
+    for( let item of taskList) {
         $('#taskTableBody').append(`
         <tr>
             <td> ${item.task} </td>
             <td data-id='completion'> ${item.complete} </td>
-            <td> <button id="completedTask" data-id= ${item.id}> Mark as Complete </button> </td>
+            <td> <input type="checkbox" id="completedTask" data-id= ${item.id} value="Mark as Complete" > </td>
             <td> <button id="deleteTask" data-id= ${item.id}> Delete </button> </td>
         </tr>`);
     }
