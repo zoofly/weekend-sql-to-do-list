@@ -7,7 +7,12 @@ th,tr{
     border-collapse: collapse;
 }
 
-li{
+.incompleteTask{
     background-color: red;
     border: 1px solid black;
+}
+
+.completedTask {
+    background-color: green;
+    border: 1px solid black;;
 }

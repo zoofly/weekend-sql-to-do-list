@@ -8,8 +8,8 @@ function onReady(){
     console.log("Page loaded");
     getTaskList();
     $('#addTask').on('click', addNewTask);
-    $('#taskBody').on('click', '#deleteTaskBtn', deleteTaskHandler);
-    $('#taskBody').on('click', '#completedTaskBtn', completedTaskHandeler );
+    $('#taskTableBody').on('click', '#deleteTaskBtn', deleteTaskHandler);
+    $('#taskTableBody').on('click', '#completedTaskBtn', completedTaskHandeler );
 }
 
 //get lists of task to populate on DOM
@@ -60,10 +60,10 @@ function renderTaskList(taskList){
         if( task.complete === false){
         $('#taskTableBody').append(`
         <tr class= "incompleteTask">
-            <td> <button id="completedTask" data-id= ${task.id}> Mark Complete </button> </td>
+            <td> <button id="completedTaskBtn" data-id= ${task.id}> Mark Complete </button> </td>
             <td> ${task.task} </td>
             <td> ${task.complete} </td>
-            <td> <button id="deleteTask" data-id= ${task.id}> Delete </button> </td>
+            <td> <button id="deleteTaskBtn" data-id= ${task.id}> Delete </button> </td>
         </tr>`);
         } else if (task.complete === true){
             $('#taskTableBody').append(`
@@ -71,7 +71,7 @@ function renderTaskList(taskList){
                 <td> </td>
                 <td> ${task.task} </td>
                 <td> ${task.complete} </td>
-                <td> <button id="deleteTask" data-id= ${task.id}> Delete </button> </td>
+                <td> <button id="deleteTaskBtn" data-id= ${task.id}> Delete </button> </td>
             </tr>`);
         }
     }
