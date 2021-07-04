@@ -28,8 +28,9 @@ function getTaskList(){
 function addNewTask(){
     console.log("in addNewTask");
     const newTask= {
-        task: $('#addTask').val()
+        task: $('#enterTaskIn').val()
     };
+    console.log( newTask);
     $.ajax({
         type: "POST",
         url:'/tasks',
@@ -37,17 +38,17 @@ function addNewTask(){
     }) .then( function (res){
         console.log(res);
         getTaskList();
-        clearInputs();
+        // clearInputs();
     }) .catch( function (err){
         console.log('error in posting new task', err);
         alert ('Unable to add new task. Please try again later.');
     });
 }
 
-function clearInputs(){
-    console.log('inputs have been cleared');
-    $('#addTask').val('');
-}
+// function clearInputs(){
+//     console.log('inputs have been cleared');
+//     $('#addTask').val('');
+// }
 
 function renderTaskList(taskList){
     $('#taskTableBody').empty();

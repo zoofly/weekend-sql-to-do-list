@@ -43,8 +43,8 @@ router.post('/', (req,res) => {
     const taskList = `
     INSERT INTO tasks (task, complete)
     VALUES ($1, $2);`;
-    pool.query(taskList, [newTask.task, newTask.complete])
-    .then(dbResponse => {
+    pool.query(taskList, [newTask.task, false])
+    .then((dbResponse) => {
         res.sendStatus(201);
     }) .catch( err => {
         console.log('Error in posting to server', err);
