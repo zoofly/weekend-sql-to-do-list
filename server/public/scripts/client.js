@@ -9,6 +9,7 @@ function onReady(){
     getTaskList();
     $('#addTask').on('click', addNewTask);
     $('#taskBody').on('click', '#deleteTaskBtn', deleteTaskHandler);
+    $('#taskBody').on('click', '#completedTaskBtn', completedTaskHandeler );
 }
 
 //get lists of task to populate on DOM
@@ -68,11 +69,34 @@ function renderTaskList(taskList){
 
 };
 
+
+//PUT REQUEST"
+function markComplete(){
+    $.ajax({
+        type: "PUT",
+        url: `/tasks/${taskId}`
+    }) .then( function (res){
+        console.log('Updated status to true');
+        getTaskList();
+    }) .catch ( function (err) {
+        console.log('Unable to update status');
+    });
+}
+
+
+//should change false complete status to true
+function completedTaskHandeler(taskId){
+    completedTask($(this).data('complete'));
+}
+
 //DELETE REQUEST
+
+//deletes from DOM
 function deleteTaskHandler(){
     deleteTask($(this).data('delete'));
 }
 
+//deletes from database
 function deleteTask(taskId){
     $.ajax({
         type: "DELETE",
