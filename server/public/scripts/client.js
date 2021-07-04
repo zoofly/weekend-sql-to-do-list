@@ -22,31 +22,23 @@ function getTaskList(){
 }
 
 
-function clearInputs(){
-    console.log('inputs have been cleared');
-    $('#numberOne').val('');
-    $('#numberTwo').val('');
-    operator='';
-}
+// function clearInputs(){
+//     console.log('inputs have been cleared');
+//     $('#numberOne').val('');
+//     $('#numberTwo').val('');
+//     operator='';
+// }
 
 function renderTaskList(){
-    $.ajax({
-        type: 'GET',
-        url: "/tasks"
-    }).then (function(res){
-        $('#taskTableBody').empty();
-        for( let task of res) {
-            $('#taskTableBody').append(`
-            <tr>
-                <td> ${task[i].priority} </td>
-                <td> ${task[i].task} </td>
-                <td data-id='completion'> ${task[i].complete} </td>
-                <td> <button id="completedTask" data-id= ${task.id}> Mark as Complete </button> </td>
-                <td> <button id="deleteTask" data-id= ${task.id}> Delete </button> </td>
-            </tr>`)
-        }
-        console.log('getting tasks', res);
-    }).catch ( function (err){
-        console.log ('Error in sending answer', err);
-    })
+    $('#taskTableBody').empty();
+    for( let item of res) {
+        $('#taskTableBody').append(`
+        <tr>
+            <td> ${item.task} </td>
+            <td data-id='completion'> ${item.complete} </td>
+            <td> <button id="completedTask" data-id= ${item.id}> Mark as Complete </button> </td>
+            <td> <button id="deleteTask" data-id= ${item.id}> Delete </button> </td>
+        </tr>`);
+    }
+
 };

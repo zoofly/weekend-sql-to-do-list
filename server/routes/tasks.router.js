@@ -37,10 +37,20 @@ router.get('/', (req,res) =>{
 
 
 //POST
+router.post('/', (req,res) => {
 
+})
 
 //PUT
+router.put('/', (req,res) => {
+
+})
+
 
 //DELETE
+router.delete('/', (req,res) => {
+    
+})
+
 
 module.exports = router;
