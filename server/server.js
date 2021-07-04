@@ -1,16 +1,16 @@
 const express= require('express');
 const app= express();
 const bodyParser = require('body-parser');
-const tasksRouter= require('./routes/tasks.router');
+const router= require('./routes/tasks.router');
 const PORT= 5000;
 
-app.use(express.static('server/public'));
+
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
-
+app.use(express.static('server/public'));
 //ROUTES:
-app.use('/tasks', tasksRouter);
+app.use('/tasks', router);
 
 
 //listen to requests on port 5000
