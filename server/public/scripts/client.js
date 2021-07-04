@@ -85,10 +85,10 @@ function completedTask(taskId){
         type: "PUT",
         url: `/tasks/${taskId}`
     }) .then( function (res){
-        console.log('Updated status to true');
+        console.log('Updated status to true', res);
         getTaskList();
     }) .catch ( function (err) {
-        console.log('Unable to update status');
+        console.log('Unable to update status', err);
     });
 } // end markComplete
 
