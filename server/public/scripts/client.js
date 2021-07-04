@@ -8,6 +8,7 @@ function onReady(){
     console.log("Page loaded");
     getTaskList();
     $('#addTask').on('click', addNewTask);
+    $('#taskTableBody').on('click', deleteTaskHandler);
 }
 
 //get lists of task to populate on DOM
@@ -57,9 +58,26 @@ function renderTaskList(taskList){
         <tr>
             <td> ${item.task} </td>
             <td data-id='completion'> ${item.complete} </td>
-            <td> <input type="checkbox" id="completedTask" data-id= ${item.id} value="Mark as Complete" > </td>
-            <td> <button id="deleteTask" data-id= ${item.id}> Delete </button> </td>
+            <td> <button id="completedTaskBtn" data-id= ${item.id}> Mark as Complete </button> </td>
+            <td> <button id="deleteTaskBtn" data-id= ${item.id}> Delete Task </button> </td>
         </tr>`);
     }
 
+};
+
+//DELETE REQUEST
+function deleteTaskHandler(){
+    deleteTask($(this).data('id'));
+}
+
+function deleteTask(taskId){
+    $.ajax({
+        type: "DELETE",
+        url: `/tasks/${taskId}`
+    }) .then (function (res){
+        console.log("Successfully deleted task.", res);
+        getTaskList();
+    }) .catch( function (err){
+        console.log('Error in deleting task', err);
+    });
 };

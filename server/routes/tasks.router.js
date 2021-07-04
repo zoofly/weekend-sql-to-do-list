@@ -54,15 +54,39 @@ router.post('/', (req,res) => {
 });
 
 //PUT
-router.put('/', (req,res) => {
-
-})
+router.put('/:id', (req,res) => {
+    const taskId= req.params.id;
+    const queryText= `UPDATE tasks
+    SET "complete" = $1 
+    WHERE "id" =$2 ;`;
+    pool.query(queryText, [
+        req.body.complete, 
+        taskId
+    ]) .then ((dbResponse) =>{
+        res.sendStatus(200);
+    }) .catch ((err) =>{
+        console.log('error updating task', err);
+        res.sendStatus(500);
+    });
+});
 
 
 //DELETE
-router.delete('/', (req,res) => {
-
-})
+router.delete('/:id', (req,res) => {
+    const taskId = req.params.id;
+    console.log(`Task ID is ${taskId}`);
+    const queryText = `
+    DELETE FROM tasks
+    WHERE id=$1;`;
+    pool.query (queryText, [taskId])
+    .then((dbResponse)=>{
+        console.log(`${dbResponse.rowCount === 1} deleted`);
+        res.sendStatus(200);
+    }) .catch (err =>{
+        console.log(`Unable to delete task ${taskId}`, err);
+        res.sendStatus(500);
+    });
+});
 
 
 module.exports = router;
