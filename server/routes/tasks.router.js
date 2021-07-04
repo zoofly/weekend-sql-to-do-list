@@ -23,16 +23,24 @@ pool.on ('error', () =>{
     console.log("Couldn't connect to database");
 });
 
-
+//GET ROUTE
 router.get('/', (req,res) =>{
     let tasksList= 'SELECT * FROM tasks;';
-    pool.query(tasksList).then ((result) => {
-        res.send(result.rows);
+    pool.query(tasksList)
+    .then ((dbResponse) => {
+        res.send(dbResponse.rows);
     }) .catch ((error => {
         console.log('Error in getting tasks from database', error);
         res.sendStatus(500);
     }));
 })
 
+
+//POST
+
+
+//PUT
+
+//DELETE
 
 module.exports = router;
