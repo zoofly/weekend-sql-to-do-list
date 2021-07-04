@@ -1,10 +1,11 @@
-$(document).on(onReady);
+$(document).ready(onReady);
 
 console.log('Javascript linked');
 
 
 //renders whatever inputted within function onto DOM when loaded
 function onReady(){
+    console.log("Page loaded");
     getTaskList();
 }
 
