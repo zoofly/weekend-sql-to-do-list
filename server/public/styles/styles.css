@@ -6,3 +6,8 @@ th,tr{
     border: 1px solid black;
     border-collapse: collapse;
 }
+
+li{
+    background-color: red;
+    border: 1px solid black;
+}

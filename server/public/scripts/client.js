@@ -8,7 +8,7 @@ function onReady(){
     console.log("Page loaded");
     getTaskList();
     $('#addTask').on('click', addNewTask);
-    $('#taskBody').on('click', deleteTaskHandler);
+    $('#taskBody').on('click', '#deleteTaskBtn', deleteTaskHandler);
 }
 
 //get lists of task to populate on DOM
@@ -55,7 +55,7 @@ function renderTaskList(taskList){
     $('#taskBody').empty();
     for( let item of taskList) {
         $('#taskBody').append(`
-        <li class=">
+        <li>
             ${item.task} 
             STATUS : ${item.complete}
             <button id="completedTaskBtn" data-complete= ${item.id}> Complete </button> 
