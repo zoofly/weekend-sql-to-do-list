@@ -15,11 +15,25 @@ h1{
 
 form{
     text-align: center;
+    
 }
 
 #enterTaskIn{
     height: 100px;
     font-size: 16px;
+}
+
+#addTask{
+    font-size: 18px;
+    background-color: peachpuff;
+    padding: 5px;
+    border-radius: 3px;
+    transition-duration: 0.5s;
+}
+#addTask:hover{
+    background-color: grey;
+    color:red;
+    cursor: pointer;
 }
 
 h2{
