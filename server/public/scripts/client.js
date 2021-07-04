@@ -9,7 +9,7 @@ function onReady(){
     getTaskList();
     $('#addTask').on('click', addNewTask);
     $('#taskTableBody').on('click', '#deleteTaskBtn', deleteTaskHandler);
-    $('#taskTableBody').on('click', '#completedTaskBtn', completedTaskHandeler );
+    $('#taskTableBody').on('click', '#completedTaskBtn', completedTaskHandler);
 }
 
 //get lists of task to populate on DOM
@@ -79,7 +79,7 @@ function renderTaskList(taskList){
 
 
 //PUT REQUEST"
-function markComplete(){
+function completedTask(taskId){
     console.log('in markComplete')
     $.ajax({
         type: "PUT",
@@ -94,7 +94,7 @@ function markComplete(){
 
 
 //should change false complete status to true
-function completedTaskHandeler(){
+function completedTaskHandler(){
     completedTask($(this).data('id'));
 }
 
