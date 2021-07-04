@@ -7,6 +7,7 @@ console.log('Javascript linked');
 function onReady(){
     console.log("Page loaded");
     getTaskList();
+    $('#addTask').on('click', addNewTask);
 }
 
 //get lists of task to populate on DOM
@@ -23,13 +24,30 @@ function getTaskList(){
         });
 }
 
+//post new task to database and clear input field
+function addNewTask(){
+    console.log("in addNewTask");
+    const newTask= {
+        task: $('#addTask').val()
+    };
+    $.ajax({
+        type: "POST",
+        url:'/tasks',
+        data: newTask
+    }) .then( function (res){
+        console.log(res);
+        getTaskList();
+        clearInputs();
+    }) .catch( function (err){
+        console.log('error in posting new task', err);
+        alert ('Unable to add new task. Please try again later.');
+    });
+}
 
-// function clearInputs(){
-//     console.log('inputs have been cleared');
-//     $('#numberOne').val('');
-//     $('#numberTwo').val('');
-//     operator='';
-// }
+function clearInputs(){
+    console.log('inputs have been cleared');
+    $('#addTask').val('');
+}
 
 function renderTaskList(taskList){
     $('#taskTableBody').empty();
